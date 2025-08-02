@@ -32,7 +32,7 @@ function Signup() {
 								<div className="d-flex align-items-center justify-content-between">
 									<div className="form-check m-0">
 										<input className="form-check-input" type="checkbox" value="" id="termsConditions" />
-										<label className="form-check-label" for="termsConditions">Je suis d'accord avec les termes et conditions d'utilisations</label>
+										<label className="form-check-label" htmlFor="termsConditions">Je suis d'accord avec les termes et conditions d'utilisations</label>
 									</div>
 								</div>
 								<div className="d-grid py-3 mt-4">

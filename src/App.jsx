@@ -1,17 +1,44 @@
 import { useState } from 'react'
+import { BrowserRouter as Router, Route , Routes} from 'react-router-dom';
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import Profile from './pages/Profile'
+import Dashboard from './pages/Dashboard'
+import { AuthProvider, useAuth } from './auth/AuthContext'
+
+
+function MainApp() {
+    const { user, loading, error, getProfileData } = useAuth();
+    if (!user) {
+        let user0 = getProfileData();
+        if (!user0) {
+            return <Login />;
+        }
+    }
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/profile" element={<Profile />} />
+            </Routes>
+            
+            {/* Add more routes as needed */}
+        </Router>
+    )
+}
+
 
 
 function App() {
-  // const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <Login />
-      {/* <Signup /> */}
-    </>
-  )
+    
+    return (
+        <AuthProvider>
+            <MainApp />
+        </AuthProvider>
+    )
 }
 
 export default App

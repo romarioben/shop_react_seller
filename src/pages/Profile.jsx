@@ -1,13 +1,19 @@
 import { Button } from 'bootstrap'
 import React from 'react'
+import api from '../axios';
+import { useAuth } from '../auth/AuthContext';
+import MainLayout from '../layouts/MainLayout';
 
 function Profile() {
-  return (
-    <div>
-      <p>This is the Profile page.</p>
-      <Button variant="primary">Get profile data</Button>
-    </div>
-  )
+    const [profileData, setProfileData] = React.useState(null);
+    
+    const currentPage = "/profile";
+
+    const { getProfileData } = useAuth();
+
+    return (
+        <MainLayout currentPage={currentPage}></MainLayout>
+    )
 }
 
 export default Profile

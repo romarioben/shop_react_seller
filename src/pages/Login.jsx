@@ -1,17 +1,20 @@
 import React from 'react'
-import api from '../axios';
+// import api from '../axios';
+import { useAuth } from '../auth/AuthContext';
 function Login() {
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
 
-    const handleSubmit = (e) => {
+	const { login, loading, error } = useAuth();
+
+    const  handleSubmit = (e) => {
         e.preventDefault();
         // Handle login logic here
-        const payload = {
-            username: username,
-            password: password  
-        };
-        console.log('Login payload:', payload);
+        // const payload = {
+        //     username: username,
+        //     password: password  
+        // };
+        // console.log('Login payload:', payload);
         // You can add your login API call here
 
 		let clientSecret = 'client_secret_password'; 
@@ -27,25 +30,30 @@ function Login() {
 		params.append('client_id', clientId);
 		params.append('client_secret', clientSecret);
 		
-		api.post('/oauth/token/',
-		params, 
-		{
-			headers: {
-				// You generally don't need to explicitly set Content-Type here for URLSearchParams,
-				// Axios handles it. But it doesn't hurt to be explicit.
-				'Content-Type': 'application/x-www-form-urlencoded'
-			},
-			// If you are sending cookies or authorization headers (e.g., Basic Auth for client_secret)
-			withCredentials: true, // Important for CORS if using cookies/session with your backend
-		}).then(response => {
-			localStorage.setItem('access_token', JSON.stringify(response.data.access_token));
-			localStorage.setItem('refresh_token', JSON.stringify(response.data.refresh_token));
-			console.log('Login successful:', response.data);
-			// Handle successful login, e.g., store token, redirect user, etc.
-		}).catch(error => {
-			console.error('Login failed:', error);
-			// Handle login failure, e.g., show error message to user
-		});
+		// api.post('/oauth/token/',
+		// params, 
+		// {
+		// 	headers: {
+		// 		// You generally don't need to explicitly set Content-Type here for URLSearchParams,
+		// 		// Axios handles it. But it doesn't hurt to be explicit.
+		// 		'Content-Type': 'application/x-www-form-urlencoded'
+		// 	},
+		// 	// If you are sending cookies or authorization headers (e.g., Basic Auth for client_secret)
+		// 	withCredentials: true, // Important for CORS if using cookies/session with your backend
+		// }).then(response => {
+		// 	localStorage.setItem('access_token', JSON.stringify(response.data.access_token));
+		// 	localStorage.setItem('refresh_token', JSON.stringify(response.data.refresh_token));
+		// 	console.log('Login successful:', response.data);
+		// 	// Handle successful login, e.g., store token, redirect user, etc.
+		// }).catch(error => {
+		// 	console.error('Login failed:', error);
+		// 	// Handle login failure, e.g., show error message to user
+		// });
+
+		login(params);
+		// After login, you can redirect the user or show a success message
+
+
 	};
 
   return (
