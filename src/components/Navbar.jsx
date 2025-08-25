@@ -17,7 +17,7 @@ function Navbar({currentPage}) {
                 <ul className="sidebar-menu">
                     <NavLink ln="/dashboard" classtext="bi bi-pie-chart" text="Dashboard" currentPage={currentPage}/>
                     
-                    <NavLink ln="/gerants" classtext="bi bi-wallet2" text="Gérants" currentPage={currentPage}/>
+                    <NavLink ln="/commandes" classtext="bi bi-command" text="Commandes" currentPage={currentPage}/>
                     <NavLink ln="/products" classtext="bi bi-box-seam" text="Products" currentPage={currentPage}/>
                     <NavLink ln="/profile" classtext="bi bi-person-square" text="Profile" currentPage={currentPage}/>
                     <NavLink ln="/settings" classtext="bi bi-gear" text="Settings" currentPage={currentPage}/>
